@@ -61,7 +61,6 @@
     <Folder Include="Post-Deployment" />
     <Folder Include="Pre-Deployment" />
     <Folder Include="Post-Deployment\DefaultData" />
-    <Folder Include="ForeignKeys" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Pre-Deployment\Script.PreDeployment1.sql" />
@@ -80,14 +79,6 @@
     <Build Include="Tables\tblOrder.sql" />
     <Build Include="Tables\tblOrderItem.sql" />
     <Build Include="Tables\tblUser.sql" />
-    <Build Include="ForeignKeys\tblMovieGenre_GenreId.sql" />
-    <Build Include="ForeignKeys\tblMovie_MovieId.sql" />
-    <Build Include="ForeignKeys\tblRating_RatingId.sql" />
-    <Build Include="ForeignKeys\tblFormat_FormatId.sql" />
-    <Build Include="ForeignKeys\tblDirector_DirectorId.sql" />
-    <Build Include="ForeignKeys\tblOrder_CustomerId.sql" />
-    <Build Include="ForeignKeys\tblOrderItem_OrderId.sql" />
-    <Build Include="ForeignKeys\tblUser_UserId.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Post-Deployment\DefaultData\Customers.sql" />
