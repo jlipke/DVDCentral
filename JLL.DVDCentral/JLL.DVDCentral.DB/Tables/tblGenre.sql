@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[tblGenre]
 (
 	[Id] INT NOT NULL PRIMARY KEY, 
-    [Description] NCHAR(10) NOT NULL
+    [Description] VARCHAR(50) NOT NULL
 )
