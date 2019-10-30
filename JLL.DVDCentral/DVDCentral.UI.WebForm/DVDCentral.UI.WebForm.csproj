@@ -116,13 +116,13 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
-    <Content Include="Directors.aspx" />
     <Content Include="favicon.ico" />
-    <Content Include="Genres.aspx" />
+    <Content Include="ManageDirectors.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Movies.aspx" />
-    <Content Include="Orders.aspx" />
-    <Content Include="Ratings.aspx" />
+    <Content Include="ManageGenres.aspx" />
+    <Content Include="ManageMovies.aspx" />
+    <Content Include="ManageOrders.aspx" />
+    <Content Include="ManageRatings.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -226,45 +226,45 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Directors.aspx.cs">
-      <DependentUpon>Directors.aspx</DependentUpon>
+    <Compile Include="ManageDirectors.aspx.cs">
+      <DependentUpon>ManageDirectors.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Directors.aspx.designer.cs">
-      <DependentUpon>Directors.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Genres.aspx.cs">
-      <DependentUpon>Genres.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Genres.aspx.designer.cs">
-      <DependentUpon>Genres.aspx</DependentUpon>
+    <Compile Include="ManageDirectors.aspx.designer.cs">
+      <DependentUpon>ManageDirectors.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Movies.aspx.cs">
-      <DependentUpon>Movies.aspx</DependentUpon>
+    <Compile Include="ManageGenres.aspx.cs">
+      <DependentUpon>ManageGenres.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Movies.aspx.designer.cs">
-      <DependentUpon>Movies.aspx</DependentUpon>
+    <Compile Include="ManageGenres.aspx.designer.cs">
+      <DependentUpon>ManageGenres.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Orders.aspx.cs">
-      <DependentUpon>Orders.aspx</DependentUpon>
+    <Compile Include="ManageMovies.aspx.cs">
+      <DependentUpon>ManageMovies.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Orders.aspx.designer.cs">
-      <DependentUpon>Orders.aspx</DependentUpon>
+    <Compile Include="ManageMovies.aspx.designer.cs">
+      <DependentUpon>ManageMovies.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManageOrders.aspx.cs">
+      <DependentUpon>ManageOrders.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageOrders.aspx.designer.cs">
+      <DependentUpon>ManageOrders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManageRatings.aspx.cs">
+      <DependentUpon>ManageRatings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageRatings.aspx.designer.cs">
+      <DependentUpon>ManageRatings.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Ratings.aspx.cs">
-      <DependentUpon>Ratings.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Ratings.aspx.designer.cs">
-      <DependentUpon>Ratings.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

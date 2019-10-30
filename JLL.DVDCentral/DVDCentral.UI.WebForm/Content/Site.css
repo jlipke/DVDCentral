@@ -30,9 +30,9 @@ textarea {
     }
 
     .bg-dark {
-        /*background-color: rebeccapurple !important;*/
+        
         background: rgb(2,0,36);
-        background: linear-gradient(90deg,rgb(0, 0, 0) 0%, rgb(255, 106, 0) 35%);
+        background: linear-gradient(90deg,rgb(0, 0, 0) 0%, cornflowerblue 35%);
     }
 
     .header {
@@ -53,4 +53,12 @@ textarea {
         border-width: 1px;
         border-style: solid;
     }
+
+    .table  {
+       width:50%;
+       padding-left:50%;
+       
+    }
+
+    
 }

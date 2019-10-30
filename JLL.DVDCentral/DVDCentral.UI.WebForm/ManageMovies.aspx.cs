@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace DVDCentral.UI.WebForm
 {
-    public partial class Movies : System.Web.UI.Page
+    public partial class ManageMovies : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -16,7 +16,27 @@ namespace DVDCentral.UI.WebForm
 
         protected void btnMovies_Click(object sender, EventArgs e)
         {
+            Response.Redirect("/ManageMovies.aspx");
+        }
 
+        protected void btnOrders_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/ManageOrders.aspx");
+        }
+
+        protected void btnRatings_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/ManageRatings.aspx");
+        }
+
+        protected void btnDirectors_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/ManageDirectors.aspx");
+        }
+
+        protected void btnGenres_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("/ManageGenres.aspx");
         }
     }
 }
