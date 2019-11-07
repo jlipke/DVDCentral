@@ -34,7 +34,7 @@ namespace JLL.DVDCentral.PL.Test
             int expected = 5;
             int actual = 0;
 
-            // Retrieve the degreetypes from the database
+            // Retrieve the ratings from the database
             var ratings = dc.tblRatings;
 
             actual = ratings.Count();
