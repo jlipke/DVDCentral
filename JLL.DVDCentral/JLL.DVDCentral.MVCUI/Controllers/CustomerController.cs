@@ -16,7 +16,7 @@ namespace JLL.DVDCentral.MVCUI.Controllers
             return View();
         }
 
-        // GET: Customer/Details/5
+        // GET: Customer/Details/
         public ActionResult Details(int id)
         {
             return View();
