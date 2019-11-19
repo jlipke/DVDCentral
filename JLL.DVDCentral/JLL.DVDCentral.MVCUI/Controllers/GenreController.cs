@@ -11,7 +11,6 @@ namespace JLL.DVDCentral.MVCUI.Controllers
     public class GenreController : Controller
     {
         List<Genre> genres;
-
         // GET: Genre
         public ActionResult Index()
         {
@@ -19,26 +18,28 @@ namespace JLL.DVDCentral.MVCUI.Controllers
             return View(genres);
         }
 
-        // GET: Genre/Details/5
+        // GET: Genre/Details/
         public ActionResult Details(int id)
         {
-            return View();
+            Genre genre = GenreManager.LoadById(id);
+            return View(genre);
         }
 
         // GET: Genre/Create
         public ActionResult Create()
         {
-            return View();
+            Genre genre = new Genre();
+            return View(genre);
         }
 
         // POST: Genre/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Genre genre)
         {
             try
             {
                 // TODO: Add insert logic here
-
+                GenreManager.Insert(genre);
                 return RedirectToAction("Index");
             }
             catch
@@ -50,17 +51,18 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Genre/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Genre genre = GenreManager.LoadById(id);
+            return View(genre);
         }
 
         // POST: Genre/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Genre genre)
         {
             try
             {
                 // TODO: Add update logic here
-
+                GenreManager.Update(genre);
                 return RedirectToAction("Index");
             }
             catch
@@ -72,17 +74,18 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Genre/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Genre genre = GenreManager.LoadById(id);
+            return View(genre);
         }
 
         // POST: Genre/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Genre genre)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                GenreManager.Delete(id);
                 return RedirectToAction("Index");
             }
             catch

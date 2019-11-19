@@ -10,32 +10,36 @@ namespace JLL.DVDCentral.MVCUI.Controllers
 {
     public class DirectorController : Controller
     {
+        List<Director> directors;
         // GET: Director
         public ActionResult Index()
         {
-            return View();
+            directors = DirectorManager.Load();
+            return View(directors);
         }
 
         // GET: Director/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            Director director = DirectorManager.LoadById(id);
+            return View(director);
         }
 
         // GET: Director/Create
         public ActionResult Create()
         {
-            return View();
+            Director director = new Director();
+            return View(director);
         }
 
         // POST: Director/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Director director)
         {
             try
             {
                 // TODO: Add insert logic here
-
+                DirectorManager.Insert(director);
                 return RedirectToAction("Index");
             }
             catch
@@ -47,17 +51,18 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Director/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Director director = DirectorManager.LoadById(id);
+            return View(director);
         }
 
         // POST: Director/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Director director)
         {
             try
             {
                 // TODO: Add update logic here
-
+                DirectorManager.Update(director);
                 return RedirectToAction("Index");
             }
             catch
@@ -69,17 +74,18 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Director/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Director director = DirectorManager.LoadById(id);
+            return View(director);
         }
 
         // POST: Director/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Director director)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                DirectorManager.Delete(id);
                 return RedirectToAction("Index");
             }
             catch

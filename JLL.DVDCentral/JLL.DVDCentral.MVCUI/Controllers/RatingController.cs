@@ -10,32 +10,36 @@ namespace JLL.DVDCentral.MVCUI.Controllers
 {
     public class RatingController : Controller
     {
+        List<Rating> ratings;
         // GET: Rating
         public ActionResult Index()
         {
-            return View();
+            ratings = RatingManager.Load();
+            return View(ratings);
         }
 
-        // GET: Rating/Details/5
+        // GET: Rating/Details/
         public ActionResult Details(int id)
         {
-            return View();
+            Rating rating = RatingManager.LoadById(id);
+            return View(rating);
         }
 
         // GET: Rating/Create
         public ActionResult Create()
         {
-            return View();
+            Rating rating = new Rating();
+            return View(rating);
         }
 
         // POST: Rating/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Rating rating)
         {
             try
             {
                 // TODO: Add insert logic here
-
+                RatingManager.Insert(rating);
                 return RedirectToAction("Index");
             }
             catch
@@ -47,17 +51,18 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Rating/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Rating rating = RatingManager.LoadById(id);
+            return View(rating);
         }
 
         // POST: Rating/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Rating rating)
         {
             try
             {
                 // TODO: Add update logic here
-
+                RatingManager.Update(rating);
                 return RedirectToAction("Index");
             }
             catch
@@ -69,17 +74,18 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Rating/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Rating rating = RatingManager.LoadById(id);
+            return View(rating);
         }
 
         // POST: Rating/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Rating rating)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                RatingManager.Delete(id);
                 return RedirectToAction("Index");
             }
             catch

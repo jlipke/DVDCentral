@@ -10,32 +10,36 @@ namespace JLL.DVDCentral.MVCUI.Controllers
 {
     public class CustomerController : Controller
     {
+        List<Customer> customers;
         // GET: Customer
         public ActionResult Index()
         {
-            return View();
+            customers = CustomerManager.Load();
+            return View(customers);
         }
 
         // GET: Customer/Details/
         public ActionResult Details(int id)
         {
-            return View();
+            Customer customer = CustomerManager.LoadById(id);
+            return View(customer);
         }
 
         // GET: Customer/Create
         public ActionResult Create()
         {
-            return View();
+            Customer customer = new Customer();
+            return View(customer);
         }
 
         // POST: Customer/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Customer customer)
         {
             try
             {
                 // TODO: Add insert logic here
-
+                CustomerManager.Insert(customer);
                 return RedirectToAction("Index");
             }
             catch
@@ -47,17 +51,18 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Customer/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Customer customer = CustomerManager.LoadById(id);
+            return View(customer);
         }
 
         // POST: Customer/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Customer customer)
         {
             try
             {
                 // TODO: Add update logic here
-
+                CustomerManager.Update(customer);
                 return RedirectToAction("Index");
             }
             catch
@@ -69,17 +74,18 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Customer/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Customer customer = CustomerManager.LoadById(id);
+            return View(customer);
         }
 
         // POST: Customer/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Customer customer)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                CustomerManager.Delete(id);
                 return RedirectToAction("Index");
             }
             catch

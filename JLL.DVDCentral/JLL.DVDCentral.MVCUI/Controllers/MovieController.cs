@@ -10,32 +10,36 @@ namespace JLL.DVDCentral.MVCUI.Controllers
 {
     public class MovieController : Controller
     {
+        List<Movie> movies;
         // GET: Movie
         public ActionResult Index()
         {
-            return View();
+            movies = MovieManager.Load();
+            return View(movies);
         }
 
-        // GET: Movie/Details/5
+        // GET: Movie/Details/
         public ActionResult Details(int id)
         {
-            return View();
+            Movie movie = MovieManager.LoadById(id);
+            return View(movie);
         }
 
         // GET: Movie/Create
         public ActionResult Create()
         {
-            return View();
+            Movie movie = new Movie();
+            return View(movie);
         }
 
         // POST: Movie/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Movie movie)
         {
             try
             {
                 // TODO: Add insert logic here
-
+                MovieManager.Insert(movie);
                 return RedirectToAction("Index");
             }
             catch
@@ -47,17 +51,18 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Movie/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Movie movie = MovieManager.LoadById(id);
+            return View(movie);
         }
 
         // POST: Movie/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Movie movie)
         {
             try
             {
                 // TODO: Add update logic here
-
+                MovieManager.Update(movie);
                 return RedirectToAction("Index");
             }
             catch
@@ -69,17 +74,18 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Movie/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            Movie movie = MovieManager.LoadById(id);
+            return View(movie);
         }
 
         // POST: Movie/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Movie movie)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                MovieManager.Delete(id);
                 return RedirectToAction("Index");
             }
             catch
