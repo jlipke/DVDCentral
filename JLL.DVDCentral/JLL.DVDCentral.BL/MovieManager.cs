@@ -286,6 +286,8 @@ namespace JLL.DVDCentral.BL
                         DirectorName = p.LastName + ", " + p.FirstName,
 
                     }));
+
+                    return results;
                 }
             }
             catch (Exception ex)
