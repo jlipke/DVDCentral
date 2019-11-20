@@ -32,10 +32,10 @@ namespace JLL.DVDCentral.BL.Models
         [DisplayName("Director Name")]
         public string DirectorName { get; set; }
 
-        [DisplayName("Format Name")]
+        [DisplayName("Format Description")]
         public string FormatName { get; set; }
 
-        [DisplayName("Rating Name")]
+        [DisplayName("Rating Description")]
         public string RatingName { get; set; }
     }
 }

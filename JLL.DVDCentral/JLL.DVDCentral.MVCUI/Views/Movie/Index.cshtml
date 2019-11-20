@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Movies</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -44,8 +44,8 @@
         </td>
         
         <td>
-            @Html.DisplayFor(modelItem => item.ImagePath)
         </td>
+
         <td>
             @Html.DisplayFor(modelItem => item.Cost)
         </td>
@@ -53,13 +53,13 @@
             @Html.DisplayFor(modelItem => item.InStockQty)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.RatingId)
+            @Html.DisplayFor(modelItem => item.RatingName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.FormatId)
+            @Html.DisplayFor(modelItem => item.FormatName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DirectorId)
+            @Html.DisplayFor(modelItem => item.DirectorName)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
