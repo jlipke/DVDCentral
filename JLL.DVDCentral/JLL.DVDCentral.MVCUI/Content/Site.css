@@ -22,3 +22,9 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.bg-dark {
+    /*background-color: rebeccapurple !important;*/
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg,rgba(2, 0, 36, 1) 0%, rgba(0, 51, 153, 1) 35%);
+}

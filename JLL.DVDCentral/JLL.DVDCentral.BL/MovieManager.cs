@@ -130,24 +130,74 @@ namespace JLL.DVDCentral.BL
                 {
                     using (DVDCentralEntities dc = new DVDCentralEntities())
                     {
-                        tblMovie tblmovie = dc.tblMovies.FirstOrDefault(p => p.Id == id);
+                        //tblMovie tblmovie = dc.tblMovies.FirstOrDefault(p => p.Id == id);
 
-                        if (tblmovie != null)
+                        //if (tblmovie != null)
+                        //{
+                        //    Movie movie = new Movie
+                        //    {
+                        //        Id = tblmovie.Id,
+                        //        Title = tblmovie.Title,
+                        //        Description = tblmovie.Description,
+                        //        ImagePath = tblmovie.ImagePath,
+                        //        Cost = tblmovie.Cost,
+                        //        InStockQty = tblmovie.InStockQty,
+                        //        RatingId = tblmovie.RatingId,
+                        //        FormatId = tblmovie.FormatId,
+                        //        DirectorId = tblmovie.DirectorId
+                        //    };
+
+                        //    return movie;
+
+                        //}
+                        //else
+                        //{
+                        //    throw new Exception("Row was not found.");
+                        //}
+
+                        var movie = (from mv in dc.tblMovies
+                                       join f in dc.tblFormats on mv.FormatId equals f.Id
+                                       join r in dc.tblRatings on mv.RatingId equals r.Id
+                                       join d in dc.tblDirectors on mv.DirectorId equals d.Id
+                                       where mv.Id == id
+                                       select new
+                                       {
+                                           MovieId = mv.Id,
+                                           FormatId = f.Id,
+                                           RatingId = r.Id,
+                                           DirectorId = d.Id,
+                                           d.FirstName,
+                                           d.LastName,
+                                           FormatName = f.Description,
+                                           RatingName = r.Description,
+                                           MVTitle = mv.Title,
+                                           MVDescription = mv.Description,
+                                           MVImagePath = mv.ImagePath,
+                                           MVCost = mv.Cost,
+                                           MVInStockQuantity = mv.InStockQty
+
+                                       }).FirstOrDefault();
+
+
+                        if (movie != null)
                         {
-                            Movie movie = new Movie
+                            JLL.DVDCentral.BL.Models.Movie Movie = new JLL.DVDCentral.BL.Models.Movie   
                             {
-                                Id = tblmovie.Id,
-                                Title = tblmovie.Title,
-                                Description = tblmovie.Description,
-                                ImagePath = tblmovie.ImagePath,
-                                Cost = tblmovie.Cost,
-                                InStockQty = tblmovie.InStockQty,
-                                RatingId = tblmovie.RatingId,
-                                FormatId = tblmovie.FormatId,
-                                DirectorId = tblmovie.DirectorId
+                                Id = movie.MovieId,
+                                FormatId = movie.FormatId,
+                                RatingId = movie.RatingId,
+                                DirectorId = movie.DirectorId,
+                                DirectorName = movie.LastName + ", " + movie.FirstName,
+                                FormatName = movie.FormatName,
+                                RatingName = movie.RatingName,
+                                Title = movie.MVTitle,
+                                Description = movie.MVDescription,
+                                ImagePath = movie.MVImagePath,
+                                Cost = movie.MVCost,
+                                InStockQty = movie.MVInStockQuantity
                             };
 
-                            return movie;
+                            return Movie;
 
                         }
                         else
@@ -168,27 +218,74 @@ namespace JLL.DVDCentral.BL
             }
         }
 
-        public static List<Movie> Load()
+        public static List<DVDCentral.BL.Models.Movie> Load()
+        {
+            return Load(null);
+        }
+        
+        public static List<Movie> Load(int? movieId)
         {
             try
             {
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
-                    List<Movie> movies = new List<Movie>();
-                    dc.tblMovies.ToList().ForEach(dt => movies.Add(new Movie
-                    {
-                        Id = dt.Id,
-                        Title = dt.Title,
-                        Description = dt.Description,
-                        ImagePath = dt.ImagePath,
-                        Cost = dt.Cost,
-                        InStockQty = dt.InStockQty,
-                        RatingId = dt.RatingId,
-                        FormatId = dt.FormatId,
-                        DirectorId = dt.DirectorId
-                    }));
+                    //List<Movie> movies = new List<Movie>();
+                    //dc.tblMovies.ToList().ForEach(dt => movies.Add(new Movie
+                    //{
+                    //    Id = dt.Id,
+                    //    Title = dt.Title,
+                    //    Description = dt.Description,
+                    //    ImagePath = dt.ImagePath,
+                    //    Cost = dt.Cost,
+                    //    InStockQty = dt.InStockQty,
+                    //    RatingId = dt.RatingId,
+                    //    FormatId = dt.FormatId,
+                    //    DirectorId = dt.DirectorId
+                    //}));
 
-                    return movies;
+                    //return movies;
+
+                    List<DVDCentral.BL.Models.Movie> results = new List<DVDCentral.BL.Models.Movie>();
+
+                    var movies = (from mv in dc.tblMovies
+                                  join f in dc.tblFormats on mv.FormatId equals f.Id
+                                  join r in dc.tblRatings on mv.RatingId equals r.Id
+                                  join d in dc.tblDirectors on mv.DirectorId equals d.Id
+                                  where (mv.Id == movieId || movieId == null)
+                                  select new
+                                  {
+                                      MovieId = mv.Id,
+                                      FormatId = f.Id,
+                                      RatingId = r.Id,
+                                      DirectorId = d.Id,
+                                      d.FirstName,
+                                      d.LastName,
+                                      FormatName = f.Description,
+                                      RatingName = r.Description,
+                                      MVTitle = mv.Title,
+                                      MVDescription = mv.Description,
+                                      MVImagePath = mv.ImagePath,
+                                      MVCost = mv.Cost,
+                                      MVInStockQuantity = mv.InStockQty
+
+                                  }).ToList();
+
+                    movies.ForEach(p => results.Add(new Movie
+                    {
+                        Id = p.MovieId,
+                        Title = p.MVTitle,
+                        Description = p.MVDescription,
+                        ImagePath = p.MVImagePath,
+                        Cost = p.MVCost,
+                        InStockQty = p.MVInStockQuantity,
+                        RatingId = p.RatingId,
+                        RatingName = p.RatingName,
+                        FormatId = p.FormatId,
+                        FormatName = p.FormatName,
+                        DirectorId = p.DirectorId,
+                        DirectorName = p.LastName + ", " + p.FirstName,
+
+                    }));
                 }
             }
             catch (Exception ex)
