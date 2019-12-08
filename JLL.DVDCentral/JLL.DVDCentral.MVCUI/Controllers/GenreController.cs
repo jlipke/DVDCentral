@@ -93,5 +93,13 @@ namespace JLL.DVDCentral.MVCUI.Controllers
                 return View();
             }
         }
+
+        [ChildActionOnly]
+        public ActionResult Sidebar()
+        {
+            var genres = GenreManager.Load();
+
+            return PartialView(genres);
+        }
     }
 }
