@@ -284,5 +284,10 @@ namespace JLL.DVDCentral.BL
                 throw ex;
             }
         }
+
+        public static List<Genre> LoadGenres(int movieId)
+        {
+            return GenreManager.Load(movieId);
+        }
     }
 }

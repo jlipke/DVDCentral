@@ -58,13 +58,27 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Movie/Edit/5
         public ActionResult Edit(int id)
         {
-            Movie movie = MovieManager.LoadById(id);
-            return View(movie);
+            MovieGenresDirectorsRatingsFormats mgdrf = new MovieGenresDirectorsRatingsFormats();
+
+            mgdrf.Movie = MovieManager.LoadById(id);
+            mgdrf.DirectorList = DirectorManager.Load();
+            mgdrf.RatingList = RatingManager.Load();
+            mgdrf.FormatList = FormatManager.Load();
+            mgdrf.GenreList = GenreManager.Load();  // Load them all
+
+            // Deal with the selected ones
+            mgdrf.Movie.Genres = MovieManager.LoadGenres(id);
+            mgdrf.GenreIds = mgdrf.Movie.Genres.Select(a => a.Id);  // Select the ids
+
+            // Put them into session
+            Session["genreids"] = mgdrf.GenreIds;
+
+            return View(mgdrf);
         }
 
         // POST: Movie/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, MovieGenresDirectorsRatingsFormats mgs)
+        public ActionResult Edit(int id, MovieGenresDirectorsRatingsFormats mgdrf)
         {
             //try
             //{
@@ -82,11 +96,11 @@ namespace JLL.DVDCentral.MVCUI.Controllers
                 // Deal with the Genres
                 IEnumerable<int> oldgenreids = new List<int>();
                 if (Session["genreids"] != null)
-                    oldgenreids = (IEnumerable<int>)Session["advisorids"];
+                    oldgenreids = (IEnumerable<int>)Session["genreids"];
 
                 IEnumerable<int> newgenreids = new List<int>();
-                if (mgs.GenreIds != null)
-                    newgenreids = mgs.GenreIds;
+                if (mgdrf.GenreIds != null)
+                    newgenreids = mgdrf.GenreIds;
 
                 // Identify the deletes
                 IEnumerable<int> deletes = oldgenreids.Except(newgenreids);    // Get the old ones that arent in the new ones
@@ -98,7 +112,7 @@ namespace JLL.DVDCentral.MVCUI.Controllers
                 adds.ToList().ForEach(a => MovieGenreManager.Add(id, a));
 
                 // TODO: Add update logic here
-                MovieManager.Update(mgs.Movie);
+                MovieManager.Update(mgdrf.Movie);
                 return RedirectToAction("Index");
             }
             catch

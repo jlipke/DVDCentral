@@ -37,5 +37,12 @@ namespace JLL.DVDCentral.BL.Models
 
         [DisplayName("Rating Description")]
         public string RatingName { get; set; }
+
+        public List<Genre> Genres { get; set; }
+
+        public Movie()
+        {
+            Genres = new List<Genre>();
+        }
     }
 }
