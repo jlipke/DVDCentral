@@ -223,37 +223,25 @@ namespace JLL.DVDCentral.BL
             return Load(null);
         }
         
-        public static List<Movie> Load(int? movieId)
+        public static List<Movie> Load(int? genreId)  
         {
             try
             {
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
-                    //List<Movie> movies = new List<Movie>();
-                    //dc.tblMovies.ToList().ForEach(dt => movies.Add(new Movie
-                    //{
-                    //    Id = dt.Id,
-                    //    Title = dt.Title,
-                    //    Description = dt.Description,
-                    //    ImagePath = dt.ImagePath,
-                    //    Cost = dt.Cost,
-                    //    InStockQty = dt.InStockQty,
-                    //    RatingId = dt.RatingId,
-                    //    FormatId = dt.FormatId,
-                    //    DirectorId = dt.DirectorId
-                    //}));
-
-                    //return movies;
+                    
 
                     List<DVDCentral.BL.Models.Movie> results = new List<DVDCentral.BL.Models.Movie>();
 
                     var movies = (from mv in dc.tblMovies
+                                  join g in dc.tblMovieGenres on mv.Id equals g.MovieId  // Joins the tblMovieGenres on with the MovieId
                                   join f in dc.tblFormats on mv.FormatId equals f.Id
                                   join r in dc.tblRatings on mv.RatingId equals r.Id
                                   join d in dc.tblDirectors on mv.DirectorId equals d.Id
-                                  where (mv.Id == movieId || movieId == null)
+                                  where (g.GenreId == genreId || genreId == null)   
                                   select new
                                   {
+                                    
                                       MovieId = mv.Id,
                                       FormatId = f.Id,
                                       RatingId = r.Id,

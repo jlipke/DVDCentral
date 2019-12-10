@@ -17,7 +17,7 @@ namespace JLL.DVDCentral.MVCUI.Controllers
             genres = GenreManager.Load();
             return View(genres);
         }
-
+        
         // GET: Genre/Details/
         public ActionResult Details(int id)
         {
