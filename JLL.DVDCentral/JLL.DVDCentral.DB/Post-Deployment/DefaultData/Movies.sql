@@ -1,4 +1,4 @@
-﻿1BEGIN
+﻿BEGIN
 	INSERT INTO [dbo].[tblMovie] (Id, Title, Description, ImagePath, Cost, InStockQty, RatingId, FormatId, DirectorId)
 	VALUES
 	(1, 'Spider-Man: Far From Home','Peter Parkers relaxing European vacation takes an unexpected turn when Nick Fury 

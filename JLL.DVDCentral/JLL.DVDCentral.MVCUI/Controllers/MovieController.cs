@@ -15,7 +15,8 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Movie
         public ActionResult Index()
         {
-            movies = MovieManager.Load();
+            ViewBag.Title = "Movies";
+            var movies = MovieManager.Load();
             return View(movies);
         }
 
@@ -28,25 +29,34 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Movie/Details/
         public ActionResult Details(int id)
         {
-            Movie movie = MovieManager.LoadById(id);
+            ViewBag.Title = "Details";
+            var movie = MovieManager.LoadById(id);
             return View(movie);
         }
 
         // GET: Movie/Create
         public ActionResult Create()
         {
-            Movie movie = new Movie();
-            return View(movie);
+            ViewBag.Title = "Create";
+            MovieGenresDirectorsRatingsFormats mgdrf = new MovieGenresDirectorsRatingsFormats();
+
+            mgdrf.Movie = new DVDCentral.BL.Models.Movie();
+            mgdrf.DirectorList = DirectorManager.Load();
+            mgdrf.RatingList = RatingManager.Load();
+            mgdrf.FormatList = FormatManager.Load();
+            mgdrf.Genres = GenreManager.Load();  // Load them all
+
+            return View(mgdrf);
         }
 
         // POST: Movie/Create
         [HttpPost]
-        public ActionResult Create(Movie movie)
+        public ActionResult Create(MovieGenresDirectorsRatingsFormats mgdrf)
         {
             try
             {
-                // TODO: Add insert logic here
-                MovieManager.Insert(movie);
+                MovieManager.Insert(mgdrf.Movie);
+                mgdrf.GenreIds.ToList().ForEach(a => MovieGenreManager.Add(mgdrf.Movie.Id, a));
                 return RedirectToAction("Index");
             }
             catch
@@ -64,7 +74,7 @@ namespace JLL.DVDCentral.MVCUI.Controllers
             mgdrf.DirectorList = DirectorManager.Load();
             mgdrf.RatingList = RatingManager.Load();
             mgdrf.FormatList = FormatManager.Load();
-            mgdrf.GenreList = GenreManager.Load();  // Load them all
+            mgdrf.Genres = GenreManager.Load();  // Load them all
 
             // Deal with the selected ones
             mgdrf.Movie.Genres = MovieManager.LoadGenres(id);
@@ -80,17 +90,7 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         [HttpPost]
         public ActionResult Edit(int id, MovieGenresDirectorsRatingsFormats mgdrf)
         {
-            //try
-            //{
-            //    // TODO: Add update logic here
-            //    MovieManager.Update(movie);
-            //    return RedirectToAction("Index");
-            //}
-            //catch
-            //{
-            //    return View();
-            //}
-
+            
             try
             {
                 // Deal with the Genres
