@@ -19,9 +19,9 @@ namespace JLL.DVDCentral.MVCUI.Controllers
             return View(movies);
         }
 
-        public ActionResult Load(int genreId)
+        public ActionResult Load(int Id)
         {
-            var movies = MovieManager.Load(genreId);
+            var movies = MovieManager.Load(Id);
             return View("Index", movies);
         }
 
