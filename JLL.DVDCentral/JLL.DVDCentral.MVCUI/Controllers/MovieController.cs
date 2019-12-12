@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -55,14 +56,30 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         {
             try
             {
+                if (mgdrf.File != null)
+                {
+                    mgdrf.Movie.ImagePath = mgdrf.File.FileName;
+                    string target = Path.Combine(Server.MapPath("~/images"), Path.GetFileName(mgdrf.File.FileName));
+
+                    if (!System.IO.File.Exists(target))
+                    {
+                        mgdrf.File.SaveAs(target);
+                        ViewBag.Message = "File Uploaded Successfullly...";
+                    }
+                    else
+                    {
+                        ViewBag.Message = "File already exists...";
+                    }
+                }
+
                 MovieManager.Insert(mgdrf.Movie);
                 mgdrf.GenreIds.ToList().ForEach(a => MovieGenreManager.Add(mgdrf.Movie.Id, a));
-                //MovieManager.Update(mgdrf.Movie);
                 return RedirectToAction("Index");
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                ViewBag.Message = ex.Message;
+                return View(mgdrf);
             }
         }
 
@@ -94,6 +111,22 @@ namespace JLL.DVDCentral.MVCUI.Controllers
             
             try
             {
+                if (mgdrf.File != null)
+                {
+                    mgdrf.Movie.ImagePath = mgdrf.File.FileName;
+                    string target = Path.Combine(Server.MapPath("~/images"), Path.GetFileName(mgdrf.File.FileName));
+
+                    if (!System.IO.File.Exists(target))
+                    {
+                        mgdrf.File.SaveAs(target);
+                        ViewBag.Message = "File Uploaded Successfullly...";
+                    }
+                    else
+                    {
+                        ViewBag.Message = "File already exists...";
+                    }
+                }
+
                 // Deal with the Genres
                 IEnumerable<int> oldgenreids = new List<int>();
                 if (Session["genreids"] != null)
@@ -116,8 +149,9 @@ namespace JLL.DVDCentral.MVCUI.Controllers
                 MovieManager.Update(mgdrf.Movie);
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
+                ViewBag.Message = ex.Message;
                 return View();
             }
         }

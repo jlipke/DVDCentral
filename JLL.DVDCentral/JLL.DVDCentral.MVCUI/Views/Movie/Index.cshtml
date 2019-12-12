@@ -1,16 +1,15 @@
 ﻿@model IEnumerable<JLL.DVDCentral.BL.Models.Movie>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Movies";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Movies</h2>
-
-<p>
+<hr />
+<p class="ml-2">
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table" >
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Title)
@@ -44,6 +43,7 @@
         </td>
         
         <td>
+            <img class="imageprop" src="~/images/@item.ImagePath" />
         </td>
 
         <td>

@@ -15,6 +15,9 @@ namespace JLL.DVDCentral.MVCUI.ViewModels
         public List<Rating> RatingList { get; set; }
         public List<Format> FormatList { get; set; }
 
+        public HttpPostedFileBase File { get; set; }
+
+
         // List of all the genre objects
         public List<Genre> Genres { get; set; }         // Change to GenreList
 
