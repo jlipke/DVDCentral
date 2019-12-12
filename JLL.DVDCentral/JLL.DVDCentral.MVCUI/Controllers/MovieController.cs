@@ -11,7 +11,7 @@ namespace JLL.DVDCentral.MVCUI.Controllers
 {
     public class MovieController : Controller
     {
-        List<Movie> movies;
+       // List<Movie> movies;
         // GET: Movie
         public ActionResult Index()
         {
@@ -57,6 +57,7 @@ namespace JLL.DVDCentral.MVCUI.Controllers
             {
                 MovieManager.Insert(mgdrf.Movie);
                 mgdrf.GenreIds.ToList().ForEach(a => MovieGenreManager.Add(mgdrf.Movie.Id, a));
+                //MovieManager.Update(mgdrf.Movie);
                 return RedirectToAction("Index");
             }
             catch
