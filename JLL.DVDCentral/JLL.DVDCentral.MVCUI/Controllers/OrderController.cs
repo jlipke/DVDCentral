@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using JLL.DVDCentral.BL;
 using JLL.DVDCentral.BL.Models;
+using JLL.DVDCentral.MVCUI.Models;
 
 namespace JLL.DVDCentral.MVCUI.Controllers
 {
@@ -14,22 +15,43 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Order
         public ActionResult Index()
         {
-            orders = OrderManager.Load();
-            return View(orders);
+            if (Authenticate.IsAuthenticated())
+            {
+                orders = OrderManager.Load();
+                return View(orders);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // GET: Order/Details/
         public ActionResult Details(int id)
         {
-            Order order = OrderManager.LoadById(id);
-            return View(order);
+            if (Authenticate.IsAuthenticated())
+            {
+                Order order = OrderManager.LoadById(id);
+                return View(order);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // GET: Order/Create
         public ActionResult Create()
         {
-            Order order = new Order();
-            return View(order);
+            if (Authenticate.IsAuthenticated())
+            {
+                Order order = new Order();
+                return View(order);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // POST: Order/Create
@@ -51,8 +73,15 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Order/Edit/5
         public ActionResult Edit(int id)
         {
-            Order order = OrderManager.LoadById(id);
-            return View(order);
+            if (Authenticate.IsAuthenticated())
+            {
+                Order order = OrderManager.LoadById(id);
+                return View(order);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // POST: Order/Edit/5
@@ -74,8 +103,15 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Order/Delete/5
         public ActionResult Delete(int id)
         {
-            Order order = OrderManager.LoadById(id);
-            return View(order);
+            if (Authenticate.IsAuthenticated())
+            {
+                Order order = OrderManager.LoadById(id);
+                return View(order);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // POST: Order/Delete/5

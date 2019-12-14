@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using JLL.DVDCentral.BL;
 using JLL.DVDCentral.BL.Models;
+using JLL.DVDCentral.MVCUI.Models;
 
 namespace JLL.DVDCentral.MVCUI.Controllers
 {
@@ -14,22 +15,43 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Director
         public ActionResult Index()
         {
-            directors = DirectorManager.Load();
-            return View(directors);
+            if (Authenticate.IsAuthenticated())
+            {
+                directors = DirectorManager.Load();
+                return View(directors);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // GET: Director/Details/5
         public ActionResult Details(int id)
         {
-            Director director = DirectorManager.LoadById(id);
-            return View(director);
+            if (Authenticate.IsAuthenticated())
+            {
+                Director director = DirectorManager.LoadById(id);
+                return View(director);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // GET: Director/Create
         public ActionResult Create()
         {
-            Director director = new Director();
-            return View(director);
+            if (Authenticate.IsAuthenticated())
+            {
+                Director director = new Director();
+                return View(director);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // POST: Director/Create
@@ -51,8 +73,15 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Director/Edit/5
         public ActionResult Edit(int id)
         {
-            Director director = DirectorManager.LoadById(id);
-            return View(director);
+            if (Authenticate.IsAuthenticated())
+            {
+                Director director = DirectorManager.LoadById(id);
+                return View(director);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // POST: Director/Edit/5
@@ -74,8 +103,15 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Director/Delete/5
         public ActionResult Delete(int id)
         {
-            Director director = DirectorManager.LoadById(id);
-            return View(director);
+            if (Authenticate.IsAuthenticated())
+            {
+                Director director = DirectorManager.LoadById(id);
+                return View(director);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // POST: Director/Delete/5

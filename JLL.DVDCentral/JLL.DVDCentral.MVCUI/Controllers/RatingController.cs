@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using JLL.DVDCentral.BL;
 using JLL.DVDCentral.BL.Models;
+using JLL.DVDCentral.MVCUI.Models;
 
 namespace JLL.DVDCentral.MVCUI.Controllers
 {
@@ -14,22 +15,43 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Rating
         public ActionResult Index()
         {
-            ratings = RatingManager.Load();
-            return View(ratings);
+            if (Authenticate.IsAuthenticated())
+            {
+                ratings = RatingManager.Load();
+                return View(ratings);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // GET: Rating/Details/
         public ActionResult Details(int id)
         {
-            Rating rating = RatingManager.LoadById(id);
-            return View(rating);
+            if (Authenticate.IsAuthenticated())
+            {
+                Rating rating = RatingManager.LoadById(id);
+                return View(rating);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // GET: Rating/Create
         public ActionResult Create()
         {
-            Rating rating = new Rating();
-            return View(rating);
+            if (Authenticate.IsAuthenticated())
+            {
+                Rating rating = new Rating();
+                return View(rating);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // POST: Rating/Create
@@ -51,8 +73,15 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Rating/Edit/5
         public ActionResult Edit(int id)
         {
-            Rating rating = RatingManager.LoadById(id);
-            return View(rating);
+            if (Authenticate.IsAuthenticated())
+            {
+                Rating rating = RatingManager.LoadById(id);
+                return View(rating);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // POST: Rating/Edit/5
@@ -74,8 +103,15 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Rating/Delete/5
         public ActionResult Delete(int id)
         {
-            Rating rating = RatingManager.LoadById(id);
-            return View(rating);
+            if (Authenticate.IsAuthenticated())
+            {
+                Rating rating = RatingManager.LoadById(id);
+                return View(rating);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // POST: Rating/Delete/5

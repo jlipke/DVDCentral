@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using JLL.DVDCentral.BL;
 using JLL.DVDCentral.BL.Models;
+using JLL.DVDCentral.MVCUI.Models;
 
 namespace JLL.DVDCentral.MVCUI.Controllers
 {
@@ -14,22 +15,43 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Genre
         public ActionResult Index()
         {
-            genres = GenreManager.Load();
-            return View(genres);
+            if (Authenticate.IsAuthenticated())
+            {
+                genres = GenreManager.Load();
+                return View(genres);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
         
         // GET: Genre/Details/
         public ActionResult Details(int id)
         {
-            Genre genre = GenreManager.LoadById(id);
-            return View(genre);
+            if (Authenticate.IsAuthenticated())
+            {
+                Genre genre = GenreManager.LoadById(id);
+                return View(genre);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // GET: Genre/Create
         public ActionResult Create()
         {
-            Genre genre = new Genre();
-            return View(genre);
+            if (Authenticate.IsAuthenticated())
+            {
+                Genre genre = new Genre();
+                return View(genre);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // POST: Genre/Create
@@ -51,8 +73,15 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Genre/Edit/5
         public ActionResult Edit(int id)
         {
-            Genre genre = GenreManager.LoadById(id);
-            return View(genre);
+            if (Authenticate.IsAuthenticated())
+            {
+                Genre genre = GenreManager.LoadById(id);
+                return View(genre);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // POST: Genre/Edit/5
@@ -74,8 +103,15 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Genre/Delete/5
         public ActionResult Delete(int id)
         {
-            Genre genre = GenreManager.LoadById(id);
-            return View(genre);
+            if (Authenticate.IsAuthenticated())
+            {
+                Genre genre = GenreManager.LoadById(id);
+                return View(genre);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // POST: Genre/Delete/5

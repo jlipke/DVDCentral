@@ -7,18 +7,25 @@ using System.Web.Mvc;
 using JLL.DVDCentral.BL;
 using JLL.DVDCentral.BL.Models;
 using JLL.DVDCentral.MVCUI.ViewModels;
+using JLL.DVDCentral.MVCUI.Models;
 
 namespace JLL.DVDCentral.MVCUI.Controllers
 {
     public class MovieController : Controller
     {
-       // List<Movie> movies;
         // GET: Movie
         public ActionResult Index()
         {
-            ViewBag.Title = "Movies";
-            var movies = MovieManager.Load();
-            return View(movies);
+            if (Authenticate.IsAuthenticated())
+            {
+                ViewBag.Title = "Movies";
+                var movies = MovieManager.Load();
+                return View(movies);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         public ActionResult Load(int Id)
@@ -30,24 +37,38 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Movie/Details/
         public ActionResult Details(int id)
         {
-            ViewBag.Title = "Details";
-            var movie = MovieManager.LoadById(id);
-            return View(movie);
+            if (Authenticate.IsAuthenticated())
+            {
+                ViewBag.Title = "Details";
+                var movie = MovieManager.LoadById(id);
+                return View(movie);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // GET: Movie/Create
         public ActionResult Create()
         {
-            ViewBag.Title = "Create";
-            MovieGenresDirectorsRatingsFormats mgdrf = new MovieGenresDirectorsRatingsFormats();
+            if (Authenticate.IsAuthenticated())
+            {
+                ViewBag.Title = "Create";
+                MovieGenresDirectorsRatingsFormats mgdrf = new MovieGenresDirectorsRatingsFormats();
 
-            mgdrf.Movie = new DVDCentral.BL.Models.Movie();
-            mgdrf.DirectorList = DirectorManager.Load();
-            mgdrf.RatingList = RatingManager.Load();
-            mgdrf.FormatList = FormatManager.Load();
-            mgdrf.Genres = GenreManager.Load();  // Load them all
+                mgdrf.Movie = new DVDCentral.BL.Models.Movie();
+                mgdrf.DirectorList = DirectorManager.Load();
+                mgdrf.RatingList = RatingManager.Load();
+                mgdrf.FormatList = FormatManager.Load();
+                mgdrf.Genres = GenreManager.Load();  // Load them all
 
-            return View(mgdrf);
+                return View(mgdrf);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // POST: Movie/Create
@@ -86,22 +107,29 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Movie/Edit/5
         public ActionResult Edit(int id)
         {
-            MovieGenresDirectorsRatingsFormats mgdrf = new MovieGenresDirectorsRatingsFormats();
+            if (Authenticate.IsAuthenticated())
+            {
+                MovieGenresDirectorsRatingsFormats mgdrf = new MovieGenresDirectorsRatingsFormats();
 
-            mgdrf.Movie = MovieManager.LoadById(id);
-            mgdrf.DirectorList = DirectorManager.Load();
-            mgdrf.RatingList = RatingManager.Load();
-            mgdrf.FormatList = FormatManager.Load();
-            mgdrf.Genres = GenreManager.Load();  // Load them all
+                mgdrf.Movie = MovieManager.LoadById(id);
+                mgdrf.DirectorList = DirectorManager.Load();
+                mgdrf.RatingList = RatingManager.Load();
+                mgdrf.FormatList = FormatManager.Load();
+                mgdrf.Genres = GenreManager.Load();  // Load them all
 
-            // Deal with the selected ones
-            mgdrf.Movie.Genres = MovieManager.LoadGenres(id);
-            mgdrf.GenreIds = mgdrf.Movie.Genres.Select(a => a.Id);  // Select the ids
+                // Deal with the selected ones
+                mgdrf.Movie.Genres = MovieManager.LoadGenres(id);
+                mgdrf.GenreIds = mgdrf.Movie.Genres.Select(a => a.Id);  // Select the ids
 
-            // Put them into session
-            Session["genreids"] = mgdrf.GenreIds;
+                // Put them into session
+                Session["genreids"] = mgdrf.GenreIds;
 
-            return View(mgdrf);
+                return View(mgdrf);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // POST: Movie/Edit/5
@@ -159,8 +187,15 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Movie/Delete/5
         public ActionResult Delete(int id)
         {
-            Movie movie = MovieManager.LoadById(id);
-            return View(movie);
+            if (Authenticate.IsAuthenticated())
+            {
+                Movie movie = MovieManager.LoadById(id);
+                return View(movie);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // POST: Movie/Delete/5

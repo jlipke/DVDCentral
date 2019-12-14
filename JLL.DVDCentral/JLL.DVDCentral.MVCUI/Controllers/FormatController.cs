@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using JLL.DVDCentral.BL;
 using JLL.DVDCentral.BL.Models;
+using JLL.DVDCentral.MVCUI.Models;
 
 namespace JLL.DVDCentral.MVCUI.Controllers
 {
@@ -14,22 +15,43 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Format
         public ActionResult Index()
         {
-            formats = FormatManager.Load();
-            return View(formats);
+            if (Authenticate.IsAuthenticated())
+            {
+                formats = FormatManager.Load();
+                return View(formats);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // GET: Format/Details/
         public ActionResult Details(int id)
         {
-            Format format = FormatManager.LoadById(id);
-            return View(format);
+            if (Authenticate.IsAuthenticated())
+            {
+                Format format = FormatManager.LoadById(id);
+                return View(format);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // GET: Format/Create
         public ActionResult Create()
         {
-            Format format = new Format();
-            return View(format);
+            if (Authenticate.IsAuthenticated())
+            {
+                Format format = new Format();
+                return View(format);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // POST: Format/Create
@@ -51,8 +73,15 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Format/Edit/5
         public ActionResult Edit(int id)
         {
-            Format format = FormatManager.LoadById(id);
-            return View(format);
+            if (Authenticate.IsAuthenticated())
+            {
+                Format format = FormatManager.LoadById(id);
+                return View(format);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // POST: Format/Edit/5
@@ -74,8 +103,15 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Format/Delete/5
         public ActionResult Delete(int id)
         {
-            Format format = FormatManager.LoadById(id);
-            return View(format);
+            if (Authenticate.IsAuthenticated())
+            {
+                Format format = FormatManager.LoadById(id);
+                return View(format);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // POST: Format/Delete/5
