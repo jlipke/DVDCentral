@@ -1,7 +1,7 @@
 ﻿BEGIN
 	INSERT INTO [dbo].[tblUser] (Id, UserId, FirstName, LastName, UserPass)
 	VALUES
-	(1, 1, 'Jim', 'James', 'p@ssword'),
-	(2, 2, 'Henry', 'Adams', 'password'),
-	(3, 3, 'John', 'Hancock', 'merica')
+	(1, 'YimYames', 'Jim', 'James', 'p@ssword'),
+	(2, 'Hadams', 'Henry', 'Adams', 'password'),
+	(3, 'Yankee', 'John', 'Hancock', 'merica')
 END

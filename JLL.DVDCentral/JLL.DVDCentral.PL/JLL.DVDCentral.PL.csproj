@@ -53,6 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="C__RefactorLog.cs">
+      <DependentUpon>DVDCentral.tt</DependentUpon>
+    </Compile>
     <Compile Include="DVDCentral.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
