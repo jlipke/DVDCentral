@@ -92,4 +92,7 @@
     <None Include="Post-Deployment\DefaultData\Ratings.sql" />
     <None Include="Post-Deployment\DefaultData\Users.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="JLL.DVDCentral.DB.refactorlog" />
+  </ItemGroup>
 </Project>
