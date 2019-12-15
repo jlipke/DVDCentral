@@ -11,30 +11,38 @@ namespace JLL.DVDCentral.BL
 {
     public class OrderManager
     {
-        public static bool Insert(Order order)
+        public static void Insert(Order order, List<Movie> items)
         {
             try
             {
+                // create a tblOrder row
+                // Loop through the items and create a tblOrderItem row with the new Order Id.
+
+
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
-                    // Make a new row
-                    tblOrder newrow = new tblOrder();
+                    // Make new rows
+                    tblOrder Ordernewrow = new tblOrder();
+                    tblOrderItem OrderItemnewrow = new tblOrderItem();
+                    
+                    
+                    //foreach()
 
                     // Set the properties
-                    // Ternary Operator condition ? true : false
-                    newrow.Id = dc.tblOrders.Any() ? dc.tblOrders.Max(p => p.Id) + 1 : 1;     // If there are any rows, get the max id and add 1, if not use 1
-                    newrow.CustomerId = order.CustomerId;
-                    newrow.OrderDate = order.OrderDate;
-                    newrow.UserId = order.UserId;
-                    newrow.PaymentReceipt = order.PaymentReceipt;
+                    Ordernewrow.Id = dc.tblOrders.Any() ? dc.tblOrders.Max(p => p.Id) + 1 : 1;     // If there are any rows, get the max id and add 1, if not use 1
+                    Ordernewrow.CustomerId = order.CustomerId;
+                    Ordernewrow.OrderDate = order.OrderDate;
+                    Ordernewrow.UserId = order.UserId;
+                    Ordernewrow.PaymentReceipt = order.PaymentReceipt;
+
+                    //OrderItemnewrow.MovieId = 
                     
                     // Do the Insert
-                    dc.tblOrders.Add(newrow);
+                    //dc.tblOrders.Add(Ordernewrow);
 
                     // Commit the insert
                     dc.SaveChanges();
-
-                    return true;
+                    
                 }
             }
             catch (Exception ex)

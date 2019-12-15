@@ -62,13 +62,23 @@
         <div class="row">
             <div class="col-md-2 sidebar rounded-top">
                 <div class="header rounded-top">
-                    <h3>Genres</h3>
+                    <h3>Programs</h3>
                 </div>
                 <div>
                     @{ Html.RenderAction("Sidebar", "Genre");}
                 </div>
-                
+                <br /><br />
+                <div class="header rounded-top">
+                    <h3>Shopping Cart</h3>
+                </div>
+                <div>
+                    @{ Html.RenderAction("CartDisplay", "ShoppingCart");}
+                </div>
             </div>
+
+            
+
+            
 
             <div id="overlay" onclick="off()">
                 <div id="imagepropbig">

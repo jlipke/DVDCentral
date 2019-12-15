@@ -61,7 +61,7 @@ namespace JLL.DVDCentral.MVCUI.Controllers
             try
             {
                 // TODO: Add insert logic here
-                OrderManager.Insert(order);
+               // OrderManager.Insert(order);
                 return RedirectToAction("Index");
             }
             catch

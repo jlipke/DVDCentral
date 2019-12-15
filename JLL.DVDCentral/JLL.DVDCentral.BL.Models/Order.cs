@@ -13,5 +13,6 @@ namespace JLL.DVDCentral.BL.Models
         public DateTime OrderDate { get; set; }
         public int UserId { get; set; }
         public string PaymentReceipt { get; set; }
+        public List<OrderItem> Items { get; set; }
     }
 }

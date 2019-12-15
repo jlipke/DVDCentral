@@ -28,11 +28,11 @@ namespace JLL.DVDCentral.BL.Test
             orderItem_2.MovieId = 333;
             orderItem_2.Quantity = 2;
 
-            bool OrderResult = OrderManager.Insert(order);
+            //bool OrderResult = OrderManager.Insert(order);
             bool OrderItemResult1 = OrderItemManager.Insert(orderItem_1);
             bool OrderItemResult2 = OrderItemManager.Insert(orderItem_2);
 
-            Assert.IsTrue(OrderResult);
+            //Assert.IsTrue(OrderResult);
             Assert.IsTrue(OrderItemResult1);
             Assert.IsTrue(OrderItemResult2);
         }

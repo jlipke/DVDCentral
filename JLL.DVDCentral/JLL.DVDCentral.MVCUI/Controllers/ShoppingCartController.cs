@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using JLL.DVDCentral.BL.Models;
 using JLL.DVDCentral.BL;
+using JLL.DVDCentral.MVCUI.Models;
 
 namespace JLL.DVDCentral.MVCUI.Controllers
 {
@@ -15,8 +16,15 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: ShoppingCart
         public ActionResult Index()
         {
-            GetShoppingCart();
-            return View(cart);
+            if (Authenticate.IsAuthenticated())
+            {
+                GetShoppingCart();
+                return View(cart);
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
+            }
         }
 
         // Show the Cart in the side bar
@@ -56,7 +64,7 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         public ActionResult Checkout()
         {
             GetShoppingCart();
-            ShoppingCartManager.Checkout(cart);
+            //ShoppingCartManager.Checkout(cart);
             return View();
         }
     }

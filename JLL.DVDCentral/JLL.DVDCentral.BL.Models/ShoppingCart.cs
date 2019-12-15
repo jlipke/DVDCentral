@@ -10,11 +10,13 @@ namespace JLL.DVDCentral.BL.Models
     {
         // This does not apply to the DVDCentral app
         // The cost of a movie is retrieved from the tblMovie.Cost
-        const double ITEM_COST = 49.99;
-
+        
         public List<Movie> Items { get; set; }
         public int TotalCount { get { return Items.Count; } }
         public double TotalCost { get; set; }
+        public double SubTotalCost { get; set; }
+        public double TaxCost { get; set; }
+        public double Cost { get; set; }
 
         public ShoppingCart()
         {
@@ -24,13 +26,19 @@ namespace JLL.DVDCentral.BL.Models
         public void Add(Movie movie)
         {
             Items.Add(movie);
-            TotalCost += ITEM_COST;
+            SubTotalCost += Convert.ToDouble(movie.Cost);
+            TaxCost = (SubTotalCost * 0.055);
+            TotalCost = SubTotalCost + TaxCost;
+            
         }
 
-        public void Remove(Movie progDec)
+        public void Remove(Movie movie)
         {
-            Items.Remove(progDec);
-            TotalCost -= ITEM_COST;
+            Items.Remove(movie);
+            SubTotalCost -= Convert.ToDouble(movie.Cost);
+            TaxCost = (SubTotalCost * 0.05);
+            TotalCost = SubTotalCost + TaxCost;
+
         }
 
         public void Checkout()

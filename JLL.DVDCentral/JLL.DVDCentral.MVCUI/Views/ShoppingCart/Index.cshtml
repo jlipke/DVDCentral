@@ -10,17 +10,12 @@
     <tr>
         <th></th>
         <th>
-            @Html.DisplayNameFor(model => model.Items[0].ProgramName)
+            @Html.DisplayNameFor(model => model.Items[0].Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Items[0].StudentName)
+            @Html.DisplayNameFor(model => model.Items[0].Cost)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Items[0].DegreeTypeName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Items[0].ChangeDate)
-        </th>
+      
 
         <th></th>
     </tr>
@@ -30,20 +25,15 @@
         <tr>
 
             <td>
-                <img src="~/images/SoftwareDeveloper.jpg" class="imageprop" />
+                <img src="~/images/@item.ImagePath" class="imageprop" />
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ProgramName)
+                @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StudentName)
+                $@Html.DisplayFor(modelItem => item.Cost)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DegreeTypeName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ChangeDate)
-            </td>
+            
             <td>
 
                 @Html.ActionLink("Remove from Cart", "RemoveFromCart", new { id = item.Id })
@@ -52,8 +42,13 @@
     }
 
 </table>
-
-<div>@Html.ActionLink("Check out", "Checkout", "ShoppingCart", null, new { @class = "btn btn-primary" })</div>
+<hr />
+<div class="ml-4">
+    <h6>Subtotal: $@Model.SubTotalCost</h6>
+    <h6>Tax: $@Model.TaxCost</h6>
+    <h4>Total Cost: $@Model.TotalCost</h4>
+    @Html.ActionLink("Check out", "Checkout", "ShoppingCart", null, new { @class = "btn btn-primary" })
+</div>
 
 
 
