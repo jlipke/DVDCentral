@@ -36,7 +36,7 @@ namespace JLL.DVDCentral.BL.Models
         {
             Items.Remove(movie);
             SubTotalCost -= Convert.ToDouble(movie.Cost);
-            TaxCost = (SubTotalCost * 0.05);
+            TaxCost = (SubTotalCost * 0.055);
             TotalCost = SubTotalCost + TaxCost;
 
         }
