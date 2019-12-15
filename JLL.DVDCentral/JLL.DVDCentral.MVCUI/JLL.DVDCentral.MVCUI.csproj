@@ -137,6 +137,7 @@
     <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\RatingController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -261,6 +262,9 @@
     <Content Include="Views\Genre\Sidebar.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Logout.cshtml" />
+    <Content Include="Views\ShoppingCart\CartDisplay.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\ShoppingCart\Checkout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
