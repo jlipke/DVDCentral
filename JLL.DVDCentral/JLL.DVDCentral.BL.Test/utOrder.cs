@@ -15,7 +15,7 @@ namespace JLL.DVDCentral.BL.Test
             Order order = new Order();
             order.CustomerId = 99;
             order.OrderDate = DateTime.Now;
-            order.UserId = 123;
+            order.UserId = "123";
             order.PaymentReceipt = "Payment Receipt";
 
             OrderItem orderItem_1 = new OrderItem();
@@ -44,7 +44,7 @@ namespace JLL.DVDCentral.BL.Test
 
             order.CustomerId = 999;
             order.OrderDate = DateTime.Now;
-            order.UserId = 123456789;
+            order.UserId = "123456789";
             order.PaymentReceipt = "Updated Payment Receipt";
 
             OrderManager.Update(order);

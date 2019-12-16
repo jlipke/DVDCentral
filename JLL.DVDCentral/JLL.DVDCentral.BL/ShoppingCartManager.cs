@@ -9,7 +9,7 @@ namespace JLL.DVDCentral.BL
 {
     public static class ShoppingCartManager
     {
-        public static void Checkout(ShoppingCart cart, User user)
+        public static void Checkout(ShoppingCart cart/*, User user*/)
         {
             /* For DVD Central, do these things when you checkout
              1) Insert an tblOrder. Get the Order.Id
@@ -23,7 +23,7 @@ namespace JLL.DVDCentral.BL
 
             Order order = new Order();
             order.CustomerId = 1;
-            //OrderManager.Insert(order, cart.Items);
+            OrderManager.Insert(order, cart.Items);
             cart.Checkout();
         }
 

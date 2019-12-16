@@ -5,17 +5,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="70daa3d356764064bed042a62c880d2a" Name="Diagram1">
-        <EntityTypeShape EntityType="JLL.DVDCentral.DBModel.tblCustomer" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JLL.DVDCentral.DBModel.tblDirector" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JLL.DVDCentral.DBModel.tblFormat" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JLL.DVDCentral.DBModel.tblGenre" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JLL.DVDCentral.DBModel.tblMovie" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JLL.DVDCentral.DBModel.tblMovieGenre" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="JLL.DVDCentral.DBModel.tblOrder" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JLL.DVDCentral.DBModel.tblOrderItem" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JLL.DVDCentral.DBModel.tblRating" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JLL.DVDCentral.DBModel.C__RefactorLog" Width="1.5" PointX="9.375" PointY="0.75" />
         <EntityTypeShape EntityType="JLL.DVDCentral.DBModel.tblUser" Width="1.5" PointX="3.375" PointY="7.75" />
+        <EntityTypeShape EntityType="JLL.DVDCentral.DBModel.tblCustomer" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="JLL.DVDCentral.DBModel.tblOrder" Width="1.5" PointX="9.75" PointY="2.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

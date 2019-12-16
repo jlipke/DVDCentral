@@ -8,8 +8,6 @@ namespace JLL.DVDCentral.BL.Models
 {
     public class ShoppingCart
     {
-        // This does not apply to the DVDCentral app
-        // The cost of a movie is retrieved from the tblMovie.Cost
         
         public List<Movie> Items { get; set; }
         public int TotalCount { get { return Items.Count; } }
@@ -45,6 +43,8 @@ namespace JLL.DVDCentral.BL.Models
         {
             Items = new List<Movie>();
             TotalCost = 0;
+            SubTotalCost = 0;
+            TaxCost = 0;
         }
 
     }

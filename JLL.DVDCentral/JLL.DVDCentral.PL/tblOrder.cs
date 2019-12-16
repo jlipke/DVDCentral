@@ -17,7 +17,7 @@ namespace JLL.DVDCentral.PL
         public int Id { get; set; }
         public int CustomerId { get; set; }
         public System.DateTime OrderDate { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public string PaymentReceipt { get; set; }
     }
 }

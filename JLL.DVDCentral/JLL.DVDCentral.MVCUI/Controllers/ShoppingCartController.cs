@@ -64,7 +64,7 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         public ActionResult Checkout()
         {
             GetShoppingCart();
-            //ShoppingCartManager.Checkout(cart);
+            ShoppingCartManager.Checkout(cart);
             return View();
         }
     }

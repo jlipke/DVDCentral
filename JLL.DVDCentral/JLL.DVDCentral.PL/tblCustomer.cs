@@ -22,6 +22,6 @@ namespace JLL.DVDCentral.PL
         public string State { get; set; }
         public string ZIP { get; set; }
         public string Phone { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
     }
 }

@@ -23,7 +23,7 @@
           <Property Name="State" Type="varchar" MaxLength="2" Nullable="false" />
           <Property Name="ZIP" Type="varchar" MaxLength="5" Nullable="false" />
           <Property Name="Phone" Type="varchar" MaxLength="12" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="tblDirector">
           <Key>
@@ -76,7 +76,7 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="CustomerId" Type="int" Nullable="false" />
           <Property Name="OrderDate" Type="datetime" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PaymentReceipt" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="tblOrderItem">
@@ -122,20 +122,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="JLL.DVDCentral.DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="tblCustomer">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="City" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ZIP" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="tblDirector">
           <Key>
             <PropertyRef Name="Id" />
@@ -180,16 +166,6 @@
           <Property Name="MovieId" Type="Int32" Nullable="false" />
           <Property Name="GenreId" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="tblOrder">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="CustomerId" Type="Int32" Nullable="false" />
-          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="PaymentReceipt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
         <EntityType Name="tblOrderItem">
           <Key>
             <PropertyRef Name="Id" />
@@ -207,17 +183,17 @@
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityContainer Name="DVDCentralEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tblCustomers" EntityType="Self.tblCustomer" />
           <EntitySet Name="tblDirectors" EntityType="Self.tblDirector" />
           <EntitySet Name="tblFormats" EntityType="Self.tblFormat" />
           <EntitySet Name="tblGenres" EntityType="Self.tblGenre" />
           <EntitySet Name="tblMovies" EntityType="Self.tblMovie" />
           <EntitySet Name="tblMovieGenres" EntityType="Self.tblMovieGenre" />
-          <EntitySet Name="tblOrders" EntityType="Self.tblOrder" />
           <EntitySet Name="tblOrderItems" EntityType="Self.tblOrderItem" />
           <EntitySet Name="tblRatings" EntityType="Self.tblRating" />
           <EntitySet Name="C__RefactorLog" EntityType="JLL.DVDCentral.DBModel.C__RefactorLog" />
           <EntitySet Name="tblUsers" EntityType="JLL.DVDCentral.DBModel.tblUser" />
+          <EntitySet Name="tblCustomers" EntityType="JLL.DVDCentral.DBModel.tblCustomer" />
+          <EntitySet Name="tblOrders" EntityType="JLL.DVDCentral.DBModel.tblOrder" />
         </EntityContainer>
         <EntityType Name="C__RefactorLog">
           <Key>
@@ -235,27 +211,36 @@
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UserPass" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="tblCustomer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="ZIP" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PaymentReceipt" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="JLLDVDCentralDBModelStoreContainer" CdmEntityContainer="DVDCentralEntities">
-          <EntitySetMapping Name="tblCustomers">
-            <EntityTypeMapping TypeName="JLL.DVDCentral.DBModel.tblCustomer">
-              <MappingFragment StoreEntitySet="tblCustomer">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="ZIP" ColumnName="ZIP" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tblDirectors">
             <EntityTypeMapping TypeName="JLL.DVDCentral.DBModel.tblDirector">
               <MappingFragment StoreEntitySet="tblDirector">
@@ -305,17 +290,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblOrders">
-            <EntityTypeMapping TypeName="JLL.DVDCentral.DBModel.tblOrder">
-              <MappingFragment StoreEntitySet="tblOrder">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="PaymentReceipt" ColumnName="PaymentReceipt" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tblOrderItems">
             <EntityTypeMapping TypeName="JLL.DVDCentral.DBModel.tblOrderItem">
               <MappingFragment StoreEntitySet="tblOrderItem">
@@ -348,6 +322,32 @@
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCustomers">
+            <EntityTypeMapping TypeName="JLL.DVDCentral.DBModel.tblCustomer">
+              <MappingFragment StoreEntitySet="tblCustomer">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="ZIP" ColumnName="ZIP" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOrders">
+            <EntityTypeMapping TypeName="JLL.DVDCentral.DBModel.tblOrder">
+              <MappingFragment StoreEntitySet="tblOrder">
+                <ScalarProperty Name="PaymentReceipt" ColumnName="PaymentReceipt" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

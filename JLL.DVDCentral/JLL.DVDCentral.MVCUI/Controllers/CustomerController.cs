@@ -46,6 +46,7 @@ namespace JLL.DVDCentral.MVCUI.Controllers
             if (Authenticate.IsAuthenticated())
             {
                 Customer customer = new Customer();
+                
                 return View(customer);
             }
             else
