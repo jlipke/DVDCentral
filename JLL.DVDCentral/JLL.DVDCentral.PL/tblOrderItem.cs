@@ -17,6 +17,6 @@ namespace JLL.DVDCentral.PL
         public int Id { get; set; }
         public int OrderId { get; set; }
         public int MovieId { get; set; }
-        public Nullable<int> Quantity { get; set; }
+        public int Quantity { get; set; }
     }
 }

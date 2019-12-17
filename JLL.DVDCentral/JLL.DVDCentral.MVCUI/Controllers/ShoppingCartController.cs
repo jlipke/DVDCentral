@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using JLL.DVDCentral.BL.Models;
 using JLL.DVDCentral.BL;
 using JLL.DVDCentral.MVCUI.Models;
+using JLL.DVDCentral.MVCUI.ViewModels;
 
 namespace JLL.DVDCentral.MVCUI.Controllers
 {
@@ -61,10 +62,11 @@ namespace JLL.DVDCentral.MVCUI.Controllers
                 cart = (ShoppingCart)Session["cart"];
         }
 
-        public ActionResult Checkout()
+        public ActionResult Checkout(CustomerOrders CO)
         {
             GetShoppingCart();
-            ShoppingCartManager.Checkout(cart);
+            Session["user"] = CO.User;
+            ShoppingCartManager.Checkout(cart, CO.User);
             return View();
         }
     }
