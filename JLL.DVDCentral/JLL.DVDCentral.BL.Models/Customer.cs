@@ -22,7 +22,7 @@ namespace JLL.DVDCentral.BL.Models
         public string ZIP { get; set; }
         public string Phone { get; set; }
 
-        [DisplayName("Username")]
+        [DisplayName("User Id")]
         public string UserId { get; set; }
 
     }

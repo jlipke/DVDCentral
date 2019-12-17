@@ -21,12 +21,24 @@ namespace JLL.DVDCentral.BL
 
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
-                    // Make new rows
+                    // Make new Order row
                     tblOrder Ordernewrow = new tblOrder();
-                    tblOrderItem OrderItemnewrow = new tblOrderItem();
-                    
-                    
-                    //foreach()
+
+                    foreach (var item in items)
+                    {
+                       // Make new OrderItem row
+                        tblOrderItem OrderItem_newrow = new tblOrderItem();
+
+                        // Set the properties
+                        OrderItem_newrow.Id = dc.tblOrders.Any() ? dc.tblOrders.Max(p => p.Id) + 1 : 1;     // If there are any rows, get the max id and add 1, if not use 1
+                        OrderItem_newrow.OrderId = order.Id;
+                        OrderItem_newrow.MovieId = item.Id;     // Should work?
+                        OrderItem_newrow.Quantity = items.Count;     // Not sure how this will work yet, would require to the controller to keep track how many of the same movie was added
+
+                        // Do the Insert
+                        dc.tblOrderItems.Add(OrderItem_newrow);
+
+                    }
 
                     // Set the properties
                     Ordernewrow.Id = dc.tblOrders.Any() ? dc.tblOrders.Max(p => p.Id) + 1 : 1;     // If there are any rows, get the max id and add 1, if not use 1
@@ -35,10 +47,9 @@ namespace JLL.DVDCentral.BL
                     Ordernewrow.UserId = order.UserId;
                     Ordernewrow.PaymentReceipt = order.PaymentReceipt;
 
-                    //OrderItemnewrow.MovieId = 
                     
                     // Do the Insert
-                    //dc.tblOrders.Add(Ordernewrow);
+                    dc.tblOrders.Add(Ordernewrow);
 
                     // Commit the insert
                     dc.SaveChanges();
