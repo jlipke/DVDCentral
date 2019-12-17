@@ -49,6 +49,44 @@ namespace JLL.DVDCentral.BL
             }
         }
 
+        public static bool Insert(string firstName, string lastName, string address, string city, string state, string zip, string phone, string userid )
+        {
+            try
+            {
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    // Make a new row
+                    tblCustomer newrow = new tblCustomer();
+
+                    // Set the properties
+                    // Ternary Operator condition ? true : false
+                    newrow.Id = dc.tblCustomers.Any() ? dc.tblCustomers.Max(p => p.Id) + 1 : 1;     // If there are any rows, get the max id and add 1, if not use 1
+                    newrow.FirstName = firstName;
+                    newrow.LastName = lastName;
+                    newrow.Address = address;
+                    newrow.City = city;
+                    newrow.State = state;
+                    newrow.ZIP = zip;
+                    newrow.Phone = phone;
+                    newrow.UserId = userid;
+
+
+                    // Do the Insert
+                    dc.tblCustomers.Add(newrow);
+
+                    // Commit the insert
+                    dc.SaveChanges();
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public static int Update(Customer customer)
         {
             using (DVDCentralEntities dc = new DVDCentralEntities())

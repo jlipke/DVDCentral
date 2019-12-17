@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using JLL.DVDCentral.BL;
 using JLL.DVDCentral.BL.Models;
 using JLL.DVDCentral.MVCUI.Models;
+using JLL.DVDCentral.MVCUI.ViewModels;
 
 namespace JLL.DVDCentral.MVCUI.Controllers
 {
@@ -43,32 +44,32 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         // GET: Customer/Create
         public ActionResult Create()
         {
-            if (Authenticate.IsAuthenticated())
-            {
-                Customer customer = new Customer();
-                
-                return View(customer);
-            }
-            else
-            {
-                return RedirectToAction("Login", "User", new { returnurl = HttpContext.Request.Url });
-            }
+            CustomerOrders CO = new CustomerOrders();
+           
+                return View(CO);
+           
 
         }
 
         // POST: Customer/Create
         [HttpPost]
-        public ActionResult Create(Customer customer)
+        public ActionResult Create(CustomerOrders CO)
         {
+            
             try
             {
+
                 // TODO: Add insert logic here
-                CustomerManager.Insert(customer);
+              
+                UserManager.Insert(CO.CU_UserId, CO.CU_FirstName, CO.CU_LastName, CO.User.PassCode);
+                CustomerManager.Insert(CO.CU_FirstName, CO.CU_LastName, CO.Customer.Address, CO.Customer.City, CO.Customer.State, CO.Customer.ZIP, CO.Customer.Phone, CO.CU_UserId);
+                
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                //   return View();
+                throw ex;
             }
         }
 
