@@ -4,4 +4,5 @@
 	(1, 'YimYames', 'Jim', 'James', 'p@ssword'),
 	(2, 'Hadams', 'Henry', 'Adams', 'password'),
 	(3, 'Yankee', 'John', 'Hancock', 'merica')
+	
 END
