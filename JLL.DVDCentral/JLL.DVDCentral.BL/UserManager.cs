@@ -10,6 +10,7 @@ namespace JLL.DVDCentral.BL
 {
     public static class UserManager
     {
+       
         private static string GetHash(string passcode)
         {
             using (var hash = new System.Security.Cryptography.SHA1Managed())
@@ -121,6 +122,84 @@ namespace JLL.DVDCentral.BL
                 else
                 {
                     throw new Exception("UserId was not set.");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public static int GetCustomerId(string userId)
+        {
+            try
+            {
+                if(userId != null || userId != "")
+                {
+                    using (DVDCentralEntities dc = new DVDCentralEntities())
+                    {
+                        var customer = (from c in dc.tblCustomers
+                                        join u in dc.tblUsers on c.UserId equals u.UserId
+                                        where u.UserId == userId
+                                        select new
+                                        {
+                                            CustomerId = c.Id,
+                                            CUserId = u.UserId,   // Check later
+                                            CFirstName = c.FirstName,
+                                            CLastName = c.LastName,
+                                            CAddress = c.Address,
+                                            CCity = c.City,
+                                            CState = c.State,
+                                            CZIP = c.ZIP,
+                                            CPhone = c.Phone
+
+                                       //FormatId = f.Id,
+                                       //RatingId = r.Id,
+                                       //DirectorId = d.Id,
+                                       //d.FirstName,
+                                       //d.LastName,
+                                       //FormatName = f.Description,
+                                       //RatingName = r.Description,
+                                       //MVTitle = mv.Title,
+                                       //MVDescription = mv.Description,
+                                       //MVImagePath = mv.ImagePath,
+                                       //MVCost = mv.Cost,
+                                       //MVInStockQuantity = mv.InStockQty
+
+                                   }).FirstOrDefault();
+
+                       
+
+                        if (customer != null)
+                        {
+                            JLL.DVDCentral.BL.Models.Customer Customer = new JLL.DVDCentral.BL.Models.Customer
+                             
+                            {
+                                Id = customer.CustomerId,
+                                UserId = customer.CUserId,
+                                FirstName = customer.CFirstName,
+                                LastName = customer.CLastName,
+                                Address = customer.CAddress,
+                                City = customer.CCity,
+                                State = customer.CState,
+                                ZIP = customer.CZIP,
+                                Phone = customer.CPhone,
+                                
+                            };
+
+                            return Customer.Id;
+
+                        }
+                        else
+                        {
+                            throw new Exception("Row was not found.");
+                        }
+                    }
+                }
+                else
+                {
+                    throw new Exception("Row was not found.");
                 }
             }
             catch (Exception ex)

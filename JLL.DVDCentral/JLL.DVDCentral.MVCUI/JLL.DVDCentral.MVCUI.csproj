@@ -160,6 +160,7 @@
     </Compile>
     <Compile Include="Models\Authenticate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\CustomerShoppingCart.cs" />
     <Compile Include="ViewModels\CustomerOrders.cs" />
     <Compile Include="ViewModels\MovieGenresDirectorsRatingsFormats.cs" />
   </ItemGroup>
@@ -281,7 +282,7 @@
     <Content Include="Views\User\Logout.cshtml" />
     <Content Include="Views\ShoppingCart\CartDisplay.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
-    <Content Include="Views\ShoppingCart\Checkout.cshtml" />
+    <Content Include="Views\ShoppingCart\ThankYou.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -130,31 +130,7 @@ namespace JLL.DVDCentral.BL
                 {
                     using (DVDCentralEntities dc = new DVDCentralEntities())
                     {
-                        //tblMovie tblmovie = dc.tblMovies.FirstOrDefault(p => p.Id == id);
-
-                        //if (tblmovie != null)
-                        //{
-                        //    Movie movie = new Movie
-                        //    {
-                        //        Id = tblmovie.Id,
-                        //        Title = tblmovie.Title,
-                        //        Description = tblmovie.Description,
-                        //        ImagePath = tblmovie.ImagePath,
-                        //        Cost = tblmovie.Cost,
-                        //        InStockQty = tblmovie.InStockQty,
-                        //        RatingId = tblmovie.RatingId,
-                        //        FormatId = tblmovie.FormatId,
-                        //        DirectorId = tblmovie.DirectorId
-                        //    };
-
-                        //    return movie;
-
-                        //}
-                        //else
-                        //{
-                        //    throw new Exception("Row was not found.");
-                        //}
-
+                        
                         var movie = (from mv in dc.tblMovies
                                        join f in dc.tblFormats on mv.FormatId equals f.Id
                                        join r in dc.tblRatings on mv.RatingId equals r.Id

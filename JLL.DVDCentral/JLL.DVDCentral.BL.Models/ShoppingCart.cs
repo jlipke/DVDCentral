@@ -15,6 +15,7 @@ namespace JLL.DVDCentral.BL.Models
         public double SubTotalCost { get; set; }
         public double TaxCost { get; set; }
         public double Cost { get; set; }
+        public int CustomerId { get; set; } 
 
         public ShoppingCart()
         {

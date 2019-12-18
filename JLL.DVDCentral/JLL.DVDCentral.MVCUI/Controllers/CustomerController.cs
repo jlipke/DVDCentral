@@ -58,7 +58,6 @@ namespace JLL.DVDCentral.MVCUI.Controllers
             
             try
             {
-
                 // TODO: Add insert logic here
               
                 UserManager.Insert(CO.CU_UserId, CO.CU_FirstName, CO.CU_LastName, CO.User.PassCode);
@@ -68,7 +67,6 @@ namespace JLL.DVDCentral.MVCUI.Controllers
             }
             catch (Exception ex)
             {
-                //   return View();
                 throw ex;
             }
         }

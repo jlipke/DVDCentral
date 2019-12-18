@@ -11,48 +11,28 @@ namespace JLL.DVDCentral.BL
 {
     public class OrderManager
     {
-        public static void Insert(Order order, List<Movie> items)
+        public static int Insert(Order order, List<Movie> items)  
         {
             try
             {
-                // create a tblOrder row
-                // Loop through the items and create a tblOrderItem row with the new Order Id.
-
-
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
                     // Make new Order row
-                    tblOrder Ordernewrow = new tblOrder();
-
-                    foreach (var item in items)
-                    {
-                       // Make new OrderItem row
-                        tblOrderItem OrderItem_newrow = new tblOrderItem();
-
-                        // Set the properties
-                        OrderItem_newrow.Id = dc.tblOrders.Any() ? dc.tblOrders.Max(p => p.Id) + 1 : 1;     // If there are any rows, get the max id and add 1, if not use 1
-                        OrderItem_newrow.OrderId = order.Id;
-                        OrderItem_newrow.MovieId = item.Id;     
-                        OrderItem_newrow.Quantity = items.Count;    
-
-                        // Do the Insert
-                        dc.tblOrderItems.Add(OrderItem_newrow);
-
-                    }
+                    tblOrder newrow = new tblOrder();
 
                     // Set the properties
-                    Ordernewrow.Id = dc.tblOrders.Any() ? dc.tblOrders.Max(p => p.Id) + 1 : 1;     // If there are any rows, get the max id and add 1, if not use 1
-                    Ordernewrow.CustomerId = order.CustomerId;
-                    Ordernewrow.OrderDate = order.OrderDate;
-                    Ordernewrow.UserId = order.UserId;
-                    Ordernewrow.PaymentReceipt = order.PaymentReceipt;
-
+                    newrow.Id = order.Id;    
+                    newrow.CustomerId = order.CustomerId;
+                    newrow.OrderDate = order.OrderDate;
+                    newrow.UserId = order.UserId;
+                    newrow.PaymentReceipt = order.PaymentReceipt;
+                    
                     
                     // Do the Insert
-                    dc.tblOrders.Add(Ordernewrow);
+                    dc.tblOrders.Add(newrow);
 
                     // Commit the insert
-                    dc.SaveChanges();
+                    return dc.SaveChanges();
                     
                 }
             }

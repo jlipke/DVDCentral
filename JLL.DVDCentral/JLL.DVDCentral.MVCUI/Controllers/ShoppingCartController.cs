@@ -56,18 +56,43 @@ namespace JLL.DVDCentral.MVCUI.Controllers
 
         private void GetShoppingCart()
         {
-            if (Session["cart"] == null)
-                cart = new ShoppingCart();
+            if  (Session["cart"] == null){
+                    cart = new ShoppingCart();
+                    Session["cart"] = cart;
+                }
             else
                 cart = (ShoppingCart)Session["cart"];
+            
+        }
+        
+        public ActionResult Checkout()
+        {
+            try
+            {
+                CustomerOrders co = new CustomerOrders();
+                co.CustomerList = CustomerManager.Load();
+                User currentUser = (User)Session["user"];
+                
+                GetShoppingCart();
+                
+                // We need to get the CustomerId from the user with a sql join
+                cart.CustomerId = UserManager.GetCustomerId(currentUser.UserId);
+                
+                ShoppingCartManager.Checkout(cart, currentUser);    
+                Session["cart"] = null;
+                return RedirectToAction("ThankYou");
+                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
-        public ActionResult Checkout(User user)
+        public ActionResult ThankYou()
         {
-            GetShoppingCart();
-            Session["user"] = user;
-            ShoppingCartManager.Checkout(cart, user);
             return View();
         }
+
     }
 }

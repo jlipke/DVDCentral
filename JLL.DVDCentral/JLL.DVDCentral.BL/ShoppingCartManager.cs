@@ -10,52 +10,33 @@ namespace JLL.DVDCentral.BL
 {
     public static class ShoppingCartManager
     {
-        public static void Checkout(ShoppingCart cart, User user /*, Customer customer */)
+        public static void Checkout(ShoppingCart cart, User user)
         {
             using (DVDCentralEntities dc = new DVDCentralEntities())
             {
-                /* For DVD Central, do these things when you checkout
-                 1) Insert an tblOrder. Get the Order.Id
-                 2) Loop through the Items, insert a tblOrderItem record with the new Order.Id
-                 3) Remove the item from the cart.
-                 Add in an OrderManager*/
-
-                 
+                
                 Order order = new Order();
                 order.Id = dc.tblOrders.Any() ? dc.tblOrders.Max(p => p.Id) + 1 : 1;
                 order.UserId = user.UserId;
-
-                var cid = (from c in dc.tblCustomers
-                           join u in dc.tblUsers on c.UserId equals u.UserId
-                           where c.UserId == user.UserId
-                           select new
-                           {
-                               CustomerId = c.Id,
-                               CFirstName = c.FirstName,
-                               CLastName = c.LastName,
-                               CAddress = c.Address,
-                               CCity = c.City,
-                               CState = c.State,
-                               CZip = c.ZIP,
-                               CPhone = c.Phone,
-                               UserID = c.UserId
-
-                           }).FirstOrDefault();
-
-                //if (cid != null)
-                //{
-                //    Customer customer = new Customer
-                //    {
-
-                //    };
-
-                //}
-
-                order.CustomerId = 1;   // Until cid isn't null
+                order.CustomerId = cart.CustomerId;
                 order.PaymentReceipt = Convert.ToString(cart.TotalCost);
                 order.OrderDate = DateTime.Now;
+
                 OrderManager.Insert(order, cart.Items);
-                cart.Checkout();
+                
+                // Add an order item for each movie
+                foreach (Movie movie in cart.Items)
+                {
+                    OrderItem orderItem = new OrderItem();
+                    orderItem.MovieId = movie.Id;
+                    orderItem.OrderId = order.Id;
+                    orderItem.Quantity = 1;
+
+                    OrderItemManager.Insert(orderItem);
+                }
+
+
+                cart.Items = null;  // Clear the cart
             }
             
         }
