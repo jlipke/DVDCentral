@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using JLL.DVDCentral.BL;
 using JLL.DVDCentral.BL.Models;
 using JLL.DVDCentral.MVCUI.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace JLL.DVDCentral.MVCUI.Controllers
 {
     public class DirectorController : Controller
     {
         List<Director> directors;
+        
         // GET: Director
         public ActionResult Index()
         {
@@ -129,5 +133,7 @@ namespace JLL.DVDCentral.MVCUI.Controllers
                 return View();
             }
         }
+
+        
     }
 }

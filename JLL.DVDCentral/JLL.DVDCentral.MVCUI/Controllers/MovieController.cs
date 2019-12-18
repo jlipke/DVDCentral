@@ -8,11 +8,15 @@ using JLL.DVDCentral.BL;
 using JLL.DVDCentral.BL.Models;
 using JLL.DVDCentral.MVCUI.ViewModels;
 using JLL.DVDCentral.MVCUI.Models;
+using System.Net.Http;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace JLL.DVDCentral.MVCUI.Controllers
 {
     public class MovieController : Controller
     {
+        #region "PreWebAPI"
         // GET: Movie
         public ActionResult Index()
         {
@@ -213,5 +217,134 @@ namespace JLL.DVDCentral.MVCUI.Controllers
                 return View();
             }
         }
+        #endregion
+
+        #region "WebAPI"
+
+        private static HttpClient InitializeClient()
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:64499/api/");
+            return client;
+
+        }
+
+        public ActionResult Get()
+        {
+            HttpClient client = InitializeClient();
+
+            // Do the actual call to the WebAPI
+            HttpResponseMessage response = client.GetAsync("Movie").Result;
+
+            // Parse the result
+            string result = response.Content.ReadAsStringAsync().Result;
+
+            // Parse the result into generic objects
+            dynamic items = (JArray)JsonConvert.DeserializeObject(result);
+
+            // Parse the items into a list of movie objects
+            List<Movie> movies = items.ToObject<List<Movie>>();
+
+            ViewBag.Source = "Get";
+            return View("Index", movies);
+        }
+
+        public ActionResult GetOne(int id)
+        {
+            HttpClient client = InitializeClient();
+
+            // Do the actual call to the WebAPI
+            HttpResponseMessage response = client.GetAsync("Movie/" + id).Result;
+
+            // Parse the result
+            string result = response.Content.ReadAsStringAsync().Result;
+
+            // Parse the result into generic objects
+            Movie movie = JsonConvert.DeserializeObject<Movie>(result);
+
+            return View("Details", movie);
+        }
+
+        public ActionResult Insert()
+        {
+            HttpClient client = InitializeClient();
+            Movie movie = new Movie();
+            return View("Create", movie);
+
+        }
+
+        [HttpPost]
+        public ActionResult Insert(Movie movie)
+        {
+            try
+            {
+                HttpClient client = InitializeClient();
+                HttpResponseMessage response = client.PostAsJsonAsync("Movie", movie).Result;
+                return RedirectToAction("Get");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View("Create", movie);
+            }
+
+        }
+
+        public ActionResult Update(int id)
+        {
+            HttpClient client = InitializeClient();
+
+            HttpResponseMessage response = client.GetAsync("Movie/" + id).Result;
+            string result = response.Content.ReadAsStringAsync().Result;
+            Movie movie = JsonConvert.DeserializeObject<Movie>(result);
+
+            return View("Edit", movie);
+        }
+
+
+        [HttpPost]
+        public ActionResult Update(int id, Movie movie)
+        {
+            try
+            {
+                HttpClient client = InitializeClient();
+                HttpResponseMessage response = client.PutAsJsonAsync("Movie/" + id, movie).Result;
+                return RedirectToAction("Get");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View("Edit", movie);
+            }
+
+        }
+
+        public ActionResult Remove(int id)
+        {
+            HttpClient client = InitializeClient();
+            HttpResponseMessage response = client.GetAsync("Movie/" + id).Result;
+            string result = response.Content.ReadAsStringAsync().Result;
+            Movie movie = JsonConvert.DeserializeObject<Movie>(result);
+
+            return View("Delete", movie);
+        }
+
+        [HttpPost]
+        public ActionResult Remove(int id, Movie movie)
+        {
+            try
+            {
+                HttpClient client = InitializeClient();
+                HttpResponseMessage response = client.DeleteAsync("Movie/" + id).Result;
+                return RedirectToAction("Get");
+            }
+            catch (Exception ex)
+            {
+
+                ViewBag.Error = ex.Message;
+                return View("Delete", movie);
+            }
+        }
+        #endregion
     }
 }

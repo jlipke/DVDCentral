@@ -6,11 +6,15 @@ using System.Web.Mvc;
 using JLL.DVDCentral.BL;
 using JLL.DVDCentral.BL.Models;
 using JLL.DVDCentral.MVCUI.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Net.Http;
 
 namespace JLL.DVDCentral.MVCUI.Controllers
 {
     public class FormatController : Controller
     {
+       
         List<Format> formats;
         // GET: Format
         public ActionResult Index()
@@ -129,5 +133,6 @@ namespace JLL.DVDCentral.MVCUI.Controllers
                 return View();
             }
         }
+        
     }
 }

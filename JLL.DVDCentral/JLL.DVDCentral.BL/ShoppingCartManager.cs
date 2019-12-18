@@ -18,25 +18,40 @@ namespace JLL.DVDCentral.BL
                  1) Insert an tblOrder. Get the Order.Id
                  2) Loop through the Items, insert a tblOrderItem record with the new Order.Id
                  3) Remove the item from the cart.
-                 Add in an OrderManager
+                 Add in an OrderManager*/
 
-                  I passed in the cart and user into the method, created the order using the credentials 
-                  of the user, retrieved the last order, got the number off that and then foreached the orderitem inserts
-                 */
-
+                 
                 Order order = new Order();
                 order.Id = dc.tblOrders.Any() ? dc.tblOrders.Max(p => p.Id) + 1 : 1;
                 order.UserId = user.UserId;
 
-                var cid = (from u in dc.tblUsers
-                             join c in dc.tblCustomers on u.UserId equals c.UserId
-                             where u.UserId == user.UserId
-                             select new
-                             {
-                                 CustomerId = c.Id      // Only need the CustomerId
-                             }).FirstOrDefault();
-               
-                order.CustomerId = cid.CustomerId;   // Works maybe?
+                var cid = (from c in dc.tblCustomers
+                           join u in dc.tblUsers on c.UserId equals u.UserId
+                           where c.UserId == user.UserId
+                           select new
+                           {
+                               CustomerId = c.Id,
+                               CFirstName = c.FirstName,
+                               CLastName = c.LastName,
+                               CAddress = c.Address,
+                               CCity = c.City,
+                               CState = c.State,
+                               CZip = c.ZIP,
+                               CPhone = c.Phone,
+                               UserID = c.UserId
+
+                           }).FirstOrDefault();
+
+                //if (cid != null)
+                //{
+                //    Customer customer = new Customer
+                //    {
+
+                //    };
+
+                //}
+
+                order.CustomerId = 1;   // Until cid isn't null
                 order.PaymentReceipt = Convert.ToString(cart.TotalCost);
                 order.OrderDate = DateTime.Now;
                 OrderManager.Insert(order, cart.Items);

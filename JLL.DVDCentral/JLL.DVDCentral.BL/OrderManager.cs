@@ -32,8 +32,8 @@ namespace JLL.DVDCentral.BL
                         // Set the properties
                         OrderItem_newrow.Id = dc.tblOrders.Any() ? dc.tblOrders.Max(p => p.Id) + 1 : 1;     // If there are any rows, get the max id and add 1, if not use 1
                         OrderItem_newrow.OrderId = order.Id;
-                        OrderItem_newrow.MovieId = item.Id;     // Should work?
-                        OrderItem_newrow.Quantity = items.Count;     // Not sure how this will work yet, would require to the controller to keep track how many of the same movie was added
+                        OrderItem_newrow.MovieId = item.Id;     
+                        OrderItem_newrow.Quantity = items.Count;    
 
                         // Do the Insert
                         dc.tblOrderItems.Add(OrderItem_newrow);

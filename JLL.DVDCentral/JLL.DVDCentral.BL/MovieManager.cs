@@ -256,7 +256,7 @@ namespace JLL.DVDCentral.BL
                                       MVCost = mv.Cost,
                                       MVInStockQuantity = mv.InStockQty
 
-                                  }).ToList();
+                                  }).Distinct().ToList();
 
                     movies.ForEach(p => results.Add(new Movie
                     {

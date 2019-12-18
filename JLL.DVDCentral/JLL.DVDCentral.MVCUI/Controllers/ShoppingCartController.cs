@@ -62,11 +62,11 @@ namespace JLL.DVDCentral.MVCUI.Controllers
                 cart = (ShoppingCart)Session["cart"];
         }
 
-        public ActionResult Checkout(CustomerOrders CO)
+        public ActionResult Checkout(User user)
         {
             GetShoppingCart();
-            Session["user"] = CO.User;
-            ShoppingCartManager.Checkout(cart, CO.User);
+            Session["user"] = user;
+            ShoppingCartManager.Checkout(cart, user);
             return View();
         }
     }
