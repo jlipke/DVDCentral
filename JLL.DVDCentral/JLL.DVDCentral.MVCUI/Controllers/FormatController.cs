@@ -142,12 +142,10 @@ namespace JLL.DVDCentral.MVCUI.Controllers
         private static HttpClient InitializeClient()
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:51554/api/");
+            client.BaseAddress = new Uri("http://localhost:49395/api/");
             return client;
         }
-
-
-
+        
         public ActionResult Get()
         {
 

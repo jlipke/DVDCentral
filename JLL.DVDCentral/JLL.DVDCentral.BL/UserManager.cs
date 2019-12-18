@@ -104,7 +104,7 @@ namespace JLL.DVDCentral.BL
                                 }
                                 else
                                 {
-                                    //throw new Exception("Cannot login with these credentials. Your IP has been saved.");
+                                    
                                     return false;
                                 }
                             }
@@ -145,7 +145,7 @@ namespace JLL.DVDCentral.BL
                                         select new
                                         {
                                             CustomerId = c.Id,
-                                            CUserId = u.UserId,   // Check later
+                                            CUserId = u.UserId,   
                                             CFirstName = c.FirstName,
                                             CLastName = c.LastName,
                                             CAddress = c.Address,
@@ -153,20 +153,7 @@ namespace JLL.DVDCentral.BL
                                             CState = c.State,
                                             CZIP = c.ZIP,
                                             CPhone = c.Phone
-
-                                       //FormatId = f.Id,
-                                       //RatingId = r.Id,
-                                       //DirectorId = d.Id,
-                                       //d.FirstName,
-                                       //d.LastName,
-                                       //FormatName = f.Description,
-                                       //RatingName = r.Description,
-                                       //MVTitle = mv.Title,
-                                       //MVDescription = mv.Description,
-                                       //MVImagePath = mv.ImagePath,
-                                       //MVCost = mv.Cost,
-                                       //MVInStockQuantity = mv.InStockQty
-
+                                            
                                    }).FirstOrDefault();
 
                        
